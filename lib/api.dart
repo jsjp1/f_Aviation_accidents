@@ -53,7 +53,8 @@ Future<List<dynamic>> fetchInformation(String airline) async {
   }
 }
 
-Future<List<AccidentTile>> fetchAccidents(int currentIndex) async {
+Future<List<AccidentTile>> fetchAccidents(
+    int currentIndex, bool isStatsScreen) async {
   final _url =
       "${dotenv.env["SERVER_HOST"]!}/api/accidents?start=$currentIndex&size=10";
   final url = Uri.parse(_url);
@@ -73,7 +74,10 @@ Future<List<AccidentTile>> fetchAccidents(int currentIndex) async {
       currentIndex += hits.length;
 
       final accidents = hits.map<AccidentTile>((hit) {
-        return AccidentTile(hits: hit);
+        return AccidentTile(
+          hits: hit,
+          isStatsScreen: isStatsScreen,
+        );
       }).toList();
 
       return accidents;
@@ -85,7 +89,7 @@ Future<List<AccidentTile>> fetchAccidents(int currentIndex) async {
   }
 }
 
-Future<String> fetchDescription(String query, DateTime date) async {
+Future<String> fetchDescription(String query, String date) async {
   String _url = "${dotenv.env["SERVER_HOST"]!}/api/description/$query/$date";
   final url = Uri.parse(_url);
   try {
@@ -98,7 +102,7 @@ Future<String> fetchDescription(String query, DateTime date) async {
 
     if (response.statusCode == 200) {
       final decodeBody = utf8.decode(response.bodyBytes);
-      final dynamic hits = jsonDecode(decodeBody);
+      final hits = jsonDecode(decodeBody);
 
       return hits;
     } else {

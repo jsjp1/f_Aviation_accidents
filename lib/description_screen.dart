@@ -1,27 +1,21 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
-import 'package:f_aviation_accidents/aircraft_status.dart';
 import 'package:f_aviation_accidents/api.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AccidentWithDescription extends Accident {
   String description;
 
   AccidentWithDescription({
-    required DateTime date,
-    required int fatalities,
-    required int occupants,
-    required String location,
-    required String airline,
-    required AircraftStatus aircraftStatus,
+    required super.date,
+    required super.fatalities,
+    required super.occupants,
+    required super.location,
+    required super.airline,
+    required super.aircraftStatus,
     required this.description,
-  }) : super(
-          date: date,
-          fatalities: fatalities,
-          occupants: occupants,
-          location: location,
-          airline: airline,
-          aircraftStatus: aircraftStatus,
-        );
+  });
 }
 
 class DescriptionScreen extends StatefulWidget {
@@ -47,8 +41,10 @@ class DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   Future<void> _fetchDescription() async {
+    final String formattedDate =
+        DateFormat("yyyy-MM-dd").format(widget.acc.date);
     final description =
-        await fetchDescription(widget.acc.airline, widget.acc.date);
+        await fetchDescription(widget.acc.airline, formattedDate);
 
     setState(() {
       accDescription = AccidentWithDescription(
@@ -71,17 +67,58 @@ class DescriptionScreenState extends State<DescriptionScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Description"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      backgroundColor: Colors.white,
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              accDescription.description,
-              style: TextStyle(fontSize: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: AutoSizeText(
+                      accDescription.airline,
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                  child: IconButton(
+                    icon: Icon(Icons.menu),
+                    iconSize: 30.0,
+                    // TODO: 메뉴
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+            Flexible(
+              child: Text(
+                accDescription.description,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  height: 1.5,
+                ),
+                softWrap: true,
+                overflow: TextOverflow.visible,
+              ),
             ),
           ],
         ),

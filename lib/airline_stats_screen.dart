@@ -38,7 +38,10 @@ class StatsScreen extends StatelessWidget {
         information.isNotEmpty ? information.first["airline"] : "Not Found";
 
     final List<AccidentTile> accidentTiles = information.map((info) {
-      return AccidentTile(hits: info);
+      return AccidentTile(
+        hits: info,
+        isStatsScreen: true,
+      );
     }).toList();
 
     airlineStats = Stats(
@@ -74,6 +77,7 @@ class StatsScreen extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.menu),
                     iconSize: 30.0,
+                    // TODO: 메뉴
                     onPressed: () {},
                   ),
                 ),

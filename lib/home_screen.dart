@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _isLoading = true;
     });
 
-    newData = await fetchAccidents(currentIndex);
+    newData = await fetchAccidents(currentIndex, false);
 
     setState(() {
       data.addAll(newData);
@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IconButton(
               icon: Icon(Icons.menu),
               iconSize: 30.0,
+              // TODO: 메뉴
               onPressed: () {},
             ),
           ),
