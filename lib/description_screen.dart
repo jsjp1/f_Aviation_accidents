@@ -1,4 +1,5 @@
 import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/aircraft_status.dart';
 
 class AccidentWithDescription extends Accident {
   String description;
@@ -9,6 +10,7 @@ class AccidentWithDescription extends Accident {
     required int occupants,
     required String location,
     required String airline,
+    required AircraftStatus aircraftStatus,
     required this.description,
   }) : super(
           date: date,
@@ -16,5 +18,6 @@ class AccidentWithDescription extends Accident {
           occupants: occupants,
           location: location,
           airline: airline,
+          aircraftStatus: aircraftStatus,
         );
 }

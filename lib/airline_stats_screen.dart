@@ -47,10 +47,12 @@ class StatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
@@ -58,35 +60,36 @@ class StatsScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              Positioned(
-                top: 50.0,
-                child: Text(
-                  airlineStats.airline,
-                  style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+              Text(
+                airlineStats.airline,
+                style: const TextStyle(
+                  fontSize: 50.0,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                children: [
+                  const Text('총 사고 수: '),
+                  Text(airlineStats.totalAccidentsCount.toString()),
+                ],
               ),
               Row(
                 children: [
-                  Text(
-                    '총 사고 수: ',
-                  ),
-                  Text(
-                    airlineStats.totalAccidentsCount.toString(),
-                  )
+                  const Text('총 사망자 수: '),
+                  Text(airlineStats.totalFatalities.toString()),
                 ],
               ),
-              Row(children: [
-                Text(
-                  '총 사망자 수: ',
+              const SizedBox(height: 20.0),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: airlineStats.accidentTiles.length,
+                  itemBuilder: (context, index) {
+                    return airlineStats.accidentTiles[index];
+                  },
                 ),
-                Text(
-                  airlineStats.totalFatalities.toString(),
-                )
-              ])
+              ),
             ],
           ),
         ),

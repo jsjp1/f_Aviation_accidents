@@ -44,6 +44,12 @@ class SearchFieldState extends State<SearchField> {
           controller: _controller,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.search),
+            suffixIcon: IconButton(
+              icon: Icon(Icons.backspace_rounded),
+              onPressed: () {
+                _controller.text = "";
+              },
+            ),
             hintText: "항공사명을 입력해보세요.",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),

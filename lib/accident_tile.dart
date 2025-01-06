@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:f_aviation_accidents/aircraft_status.dart';
 
 class Accident {
   late DateTime date;
@@ -7,6 +8,7 @@ class Accident {
   int occupants = 0;
   String location = "";
   String airline = "";
+  late AircraftStatus aircraftStatus = AircraftStatus.empty;
 
   Accident({
     required this.date,
@@ -14,6 +16,7 @@ class Accident {
     required this.occupants,
     required this.location,
     required this.airline,
+    required this.aircraftStatus,
   });
 }
 
@@ -59,12 +62,15 @@ class AccidentTile extends StatelessWidget {
 
     if (occupants <= fatalities) fatalities = occupants;
 
+    AircraftStatus? status = stringToAircraftStatusMap[hits["aircraft_status"]];
+
     acc = Accident(
       date: dateTime,
       fatalities: fatalities,
       occupants: occupants,
       location: hits["location"] ?? "Unknown location",
       airline: hits["airline"] ?? "Unknown location",
+      aircraftStatus: status ?? AircraftStatus.empty,
     );
   }
 
@@ -93,7 +99,7 @@ class AccidentTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.airplanemode_active, color: Colors.blue),
+                getAircraftStatusIcon(acc.aircraftStatus),
                 SizedBox(width: 8.0),
                 Expanded(
                   child: Text(
@@ -162,5 +168,29 @@ class AccidentTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Icon getAircraftStatusIcon(AircraftStatus status) {
+  switch (status) {
+    case AircraftStatus.destroyedWrittenOff || AircraftStatus.destroyed:
+      return Icon(Icons.airplanemode_off, color: Colors.red);
+    case AircraftStatus.substantialRepaired || AircraftStatus.destroyedRepaired:
+      return Icon(Icons.build, color: Colors.orange);
+    case AircraftStatus.substantial || AircraftStatus.substantialWrittenOff:
+      return Icon(Icons.airplanemode_on, color: Colors.yellow);
+    case AircraftStatus.minor ||
+          AircraftStatus.minorRepaired ||
+          AircraftStatus.minorWrittenOff:
+      return Icon(Icons.airplanemode_on_rounded, color: Colors.orange);
+    case AircraftStatus.none || AircraftStatus.noneRepaired:
+      return Icon(Icons.airplanemode_on, color: Colors.blue);
+    case AircraftStatus.unknown ||
+          AircraftStatus.unknownUnknown ||
+          AircraftStatus.unknownRepaired ||
+          AircraftStatus.unknownWrittenOff:
+      return Icon(Icons.question_mark, color: Colors.grey);
+    default:
+      return Icon(Icons.question_mark, color: Colors.black);
   }
 }
