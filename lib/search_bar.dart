@@ -48,6 +48,7 @@ class SearchFieldState extends State<SearchField> {
               icon: Icon(Icons.backspace_rounded),
               onPressed: () {
                 _controller.text = "";
+                _streamController.add([]);
               },
             ),
             hintText: "항공사명을 입력해보세요.",
@@ -58,7 +59,19 @@ class SearchFieldState extends State<SearchField> {
           onChanged: _onSearchChanged,
           onSubmitted: (value) async {
             if (value.isNotEmpty) {
-              final List<dynamic> response = await fetchInformation(value);
+              List<dynamic> response = await fetchInformation(value);
+
+              if (response.isEmpty) {
+                try {
+                  final suggestionAirline = await fetchSuggestions(value);
+                  response = await fetchInformation(suggestionAirline[0]);
+                } catch (_) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("항공사가 존재하지 않습니다.")),
+                  );
+                  return;
+                }
+              }
 
               List<Map<String, dynamic>> listMapResponse = response.map((item) {
                 return item as Map<String, dynamic>;
@@ -96,6 +109,7 @@ class SearchFieldState extends State<SearchField> {
                     onTap: () {
                       _controller.text = snapshot.data![index];
                       _streamController.add([]);
+                      FocusScope.of(context).unfocus();
                     },
                   );
                 },

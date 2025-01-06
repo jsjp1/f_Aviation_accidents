@@ -58,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 100.0),
+              // padding: EdgeInsets.only(top: 100.0),
+              padding: EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
               child: ListView.builder(
                 controller: _scrollController,
                 itemCount: data.length + (_isLoading ? 1 : 0),

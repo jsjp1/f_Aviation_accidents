@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:intl/intl.dart';
 
 class Stats {
   String airline = "";
@@ -26,7 +27,11 @@ class StatsScreen extends StatelessWidget {
     int totalAccidentsCount = information.length;
     int totalFatalities = 0;
     for (var info in information) {
-      totalFatalities += info["fatalities"] as int;
+      if (info["fatalities"] is int) {
+        totalFatalities += info["fatalities"] as int;
+      } else if (info["fatalities"] is String) {
+        totalFatalities += int.parse(info["fatalities"]);
+      }
     }
 
     String airline =
@@ -49,40 +54,75 @@ class StatsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 0.0),
+              child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              Text(
-                airlineStats.airline,
-                style: const TextStyle(
-                  fontSize: 50.0,
-                  fontWeight: FontWeight.bold,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              Row(
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(30.0, 20.0, 0.0, 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('총 사고 수: '),
-                  Text(airlineStats.totalAccidentsCount.toString()),
+                  Text(
+                    airlineStats.airline,
+                    style: const TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    softWrap: true,
+                  ),
+                  const SizedBox(height: 20.0),
+                  Row(
+                    children: [
+                      const Text('총 사고 수: '),
+                      Text(
+                        airlineStats.totalAccidentsCount.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text('총 사망자 수: '),
+                      Text(
+                        airlineStats.totalFatalities.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text('마지막 사고 발생 시각: '),
+                      Text(
+                        airlineStats.accidentTiles.isNotEmpty
+                            ? DateFormat('yyyy-MM-dd HH:mm').format(
+                                airlineStats.accidentTiles.first.dateTime)
+                            : "",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
                 ],
               ),
-              Row(
-                children: [
-                  const Text('총 사망자 수: '),
-                  Text(airlineStats.totalFatalities.toString()),
-                ],
-              ),
-              const SizedBox(height: 20.0),
-              Expanded(
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
                 child: ListView.builder(
                   itemCount: airlineStats.accidentTiles.length,
                   itemBuilder: (context, index) {
@@ -90,8 +130,8 @@ class StatsScreen extends StatelessWidget {
                   },
                 ),
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
