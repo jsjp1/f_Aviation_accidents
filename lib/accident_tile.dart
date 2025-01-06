@@ -97,14 +97,14 @@ class AccidentTile extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(16.0),
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withAlpha(200),
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: Offset(0, 3),
+                offset: Offset(0, 4),
               ),
             ],
           ),
@@ -113,7 +113,15 @@ class AccidentTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  getAircraftStatusIcon(acc.aircraftStatus),
+                  Tooltip(
+                    message: enumToStringMap[acc.aircraftStatus],
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Aircraft status: ${acc.aircraftStatus}");
+                      },
+                      child: getAircraftStatusIcon(acc.aircraftStatus),
+                    ),
+                  ),
                   SizedBox(width: 8.0),
                   Expanded(
                     child: Align(
