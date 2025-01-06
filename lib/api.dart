@@ -84,3 +84,27 @@ Future<List<AccidentTile>> fetchAccidents(int currentIndex) async {
     return [];
   }
 }
+
+Future<String> fetchDescription(String query, DateTime date) async {
+  String _url = "${dotenv.env["SERVER_HOST"]!}/api/description/$query/$date";
+  final url = Uri.parse(_url);
+  try {
+    final response = await get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final dynamic hits = jsonDecode(decodeBody);
+
+      return hits;
+    } else {
+      return "";
+    }
+  } catch (_) {
+    return "";
+  }
+}
