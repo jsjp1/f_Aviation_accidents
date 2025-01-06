@@ -98,19 +98,39 @@ class SearchFieldState extends State<SearchField> {
               return SizedBox.shrink();
             }
             return Container(
-              color: const Color.fromARGB(18, 61, 57, 57),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15.0), // 둥근 모서리
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(snapshot.data![index]),
-                    onTap: () {
+                  return TextButton(
+                    onPressed: () {
                       _controller.text = snapshot.data![index];
                       _streamController.add([]);
                       FocusScope.of(context).unfocus();
                     },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.airplane_ticket_outlined),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(snapshot.data![index]),
+                      ],
+                    ),
                   );
                 },
               ),

@@ -57,14 +57,27 @@ class StatsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 0.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                  child: IconButton(
+                    icon: Icon(Icons.menu),
+                    iconSize: 30.0,
+                    onPressed: () {},
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(30.0, 20.0, 0.0, 0.0),

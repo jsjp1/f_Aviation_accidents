@@ -55,36 +55,51 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              // padding: EdgeInsets.only(top: 100.0),
-              padding: EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: data.length + (_isLoading ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index < data.length) {
-                    return data[index];
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+            child: IconButton(
+              icon: Icon(Icons.menu),
+              iconSize: 30.0,
+              onPressed: () {},
             ),
-            Positioned(
-              top: 10.0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.all(15.0),
-                color: Colors.white,
-                child: SearchField(),
-              ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 90.0, 15.0, 0.0),
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: data.length + (_isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < data.length) {
+                        return data[index];
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+                ),
+                Positioned(
+                  top: 0.0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(0),
+                    ),
+                    child: SearchField(),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      )),
     );
   }
 }
