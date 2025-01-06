@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/search_bar.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/api.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -44,34 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
       _isLoading = true;
     });
 
-    final _url =
-        "${dotenv.env["SERVER_HOST"]!}/api/accidents?start=$currentIndex&size=${currentIndex + 10}";
-    final url = Uri.parse(_url);
-
-    try {
-      final response = await get(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final decodeBody = utf8.decode(response.bodyBytes);
-        final List<dynamic> hits = jsonDecode(decodeBody);
-
-        newData = hits.map<AccidentTile>((hit) {
-          return AccidentTile(hits: hit);
-        }).toList();
-
-        currentIndex += hits.length;
-      }
-    } catch (e) {
-      print('Error fetching suggestions: $e');
-    }
+    newData = await fetchAccidents(currentIndex);
 
     setState(() {
       data.addAll(newData);
+      currentIndex += 10;
       _isLoading = false;
     });
   }

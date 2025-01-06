@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:f_aviation_accidents/api.dart';
+import 'package:f_aviation_accidents/airline_stats_screen.dart';
 
 class SearchField extends StatefulWidget {
   @override
@@ -23,30 +22,6 @@ class SearchFieldState extends State<SearchField> {
     super.dispose();
   }
 
-  Future<List<String>> _fetchSuggestions(String query) async {
-    String _url = "${dotenv.env["SERVER_HOST"]!}/api/suggestions/$query";
-    final url = Uri.parse(_url);
-    try {
-      final response = await get(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
-
-      // TODO: 오류 처리
-      if (response.statusCode == 200) {
-        final List<dynamic> hits = jsonDecode(response.body);
-
-        return hits.map((item) => item.toString()).toList();
-      } else {
-        return [];
-      }
-    } catch (e) {
-      return [];
-    }
-  }
-
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
@@ -56,7 +31,7 @@ class SearchFieldState extends State<SearchField> {
         return;
       }
 
-      final results = await _fetchSuggestions(query);
+      final results = await fetchSuggestions(query);
       _streamController.add(results);
     });
   }
@@ -75,6 +50,27 @@ class SearchFieldState extends State<SearchField> {
             ),
           ),
           onChanged: _onSearchChanged,
+          onSubmitted: (value) async {
+            if (value.isNotEmpty) {
+              final List<dynamic> response = await fetchInformation(value);
+
+              List<Map<String, dynamic>> listMapResponse = response.map((item) {
+                return item as Map<String, dynamic>;
+              }).toList();
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      StatsScreen(information: listMapResponse),
+                ),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("입력값이 필요합니다!")),
+              );
+            }
+          },
         ),
         StreamBuilder<List<String>>(
           stream: _streamController.stream,
@@ -83,7 +79,7 @@ class SearchFieldState extends State<SearchField> {
               return SizedBox.shrink();
             }
             return Container(
-              color: Colors.grey[200],
+              color: const Color.fromARGB(18, 61, 57, 57),
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
