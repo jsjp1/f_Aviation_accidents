@@ -88,13 +88,16 @@ class StatsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    airlineStats.airline,
-                    style: const TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: Text(
+                      airlineStats.airline,
+                      style: const TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      softWrap: true,
                     ),
-                    softWrap: true,
                   ),
                   const SizedBox(height: 20.0),
                   Row(
