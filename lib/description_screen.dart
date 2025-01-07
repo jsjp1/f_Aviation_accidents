@@ -6,15 +6,18 @@ import 'package:intl/intl.dart';
 
 class AccidentWithDescription extends Accident {
   String description;
+  String koDescription;
 
   AccidentWithDescription({
     required super.date,
+    required super.id,
     required super.fatalities,
     required super.occupants,
     required super.location,
     required super.airline,
     required super.aircraftStatus,
     required this.description,
+    required this.koDescription,
   });
 }
 
@@ -41,20 +44,21 @@ class DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   Future<void> _fetchDescription() async {
-    final String formattedDate =
-        DateFormat("yyyy-MM-dd").format(widget.acc.date);
-    final description =
-        await fetchDescription(widget.acc.airline, formattedDate);
+    final description = await fetchDescription(widget.acc.id);
+    final koDescription =
+        await translateDescription(widget.acc.id, description);
 
     setState(() {
       accDescription = AccidentWithDescription(
         date: widget.acc.date,
+        id: widget.acc.id,
         fatalities: widget.acc.fatalities,
         occupants: widget.acc.occupants,
         location: widget.acc.location,
         airline: widget.acc.airline,
         aircraftStatus: widget.acc.aircraftStatus,
         description: description,
+        koDescription: koDescription,
       );
       isLoading = false;
     });
@@ -111,7 +115,9 @@ class DescriptionScreenState extends State<DescriptionScreen> {
             ),
             Flexible(
               child: Text(
-                accDescription.description,
+                accDescription.koDescription == ""
+                    ? accDescription.description
+                    : accDescription.koDescription,
                 style: TextStyle(
                   fontSize: 16.0,
                   height: 1.5,

@@ -7,6 +7,7 @@ import 'package:f_aviation_accidents/description_screen.dart';
 
 class Accident {
   late DateTime date;
+  String id = "";
   int fatalities = 0;
   int occupants = 0;
   String location = "";
@@ -15,6 +16,7 @@ class Accident {
 
   Accident({
     required this.date,
+    required this.id,
     required this.fatalities,
     required this.occupants,
     required this.location,
@@ -70,6 +72,7 @@ class AccidentTile extends StatelessWidget {
     AircraftStatus? status = stringToAircraftStatusMap[hits["aircraft_status"]];
 
     acc = Accident(
+      id: hits["_id"] ?? "Unknown document id",
       date: dateTime,
       fatalities: fatalities,
       occupants: occupants,
