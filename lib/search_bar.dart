@@ -5,20 +5,25 @@ import 'package:f_aviation_accidents/api.dart';
 import 'package:f_aviation_accidents/airline_stats_screen.dart';
 
 class SearchField extends StatefulWidget {
+  final StreamController<List<String>> streamController;
+
+  const SearchField({
+    super.key,
+    required this.streamController,
+  });
+
   @override
   SearchFieldState createState() => SearchFieldState();
 }
 
 class SearchFieldState extends State<SearchField> {
-  final TextEditingController _controller = TextEditingController();
-  final StreamController<List<String>> _streamController = StreamController();
+  final TextEditingController _textController = TextEditingController();
   Timer? _debounce;
   late List<String> suggestionResults = [];
 
   @override
   void dispose() {
-    _controller.dispose();
-    _streamController.close();
+    _textController.dispose();
     _debounce?.cancel();
     super.dispose();
   }
@@ -28,12 +33,12 @@ class SearchFieldState extends State<SearchField> {
 
     _debounce = Timer(Duration(milliseconds: 300), () async {
       if (query.isEmpty) {
-        _streamController.add([]);
+        widget.streamController.add([]);
         return;
       }
 
       suggestionResults = await fetchSuggestions(query);
-      _streamController.add(suggestionResults);
+      widget.streamController.add(suggestionResults);
     });
   }
 
@@ -42,14 +47,16 @@ class SearchFieldState extends State<SearchField> {
     return Column(
       children: [
         TextField(
-          controller: _controller,
+          controller: _textController,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.search),
             suffixIcon: IconButton(
               icon: Icon(Icons.backspace_rounded),
               onPressed: () {
-                _controller.text = "";
-                _streamController.add([]);
+                _textController.text = "";
+                widget.streamController.add([]);
+                suggestionResults = [];
+                FocusScope.of(context).unfocus();
               },
             ),
             hintText: "항공사명을 입력해보세요.",
@@ -58,12 +65,8 @@ class SearchFieldState extends State<SearchField> {
             ),
           ),
           onChanged: _onSearchChanged,
-          onTapOutside: (event) {
-            _streamController.add([]);
-            FocusScope.of(context).unfocus();
-          },
           onTap: () {
-            _streamController.add(suggestionResults);
+            widget.streamController.add(suggestionResults);
           },
           onSubmitted: (value) async {
             if (value.isNotEmpty) {
@@ -100,7 +103,7 @@ class SearchFieldState extends State<SearchField> {
           },
         ),
         StreamBuilder<List<String>>(
-          stream: _streamController.stream,
+          stream: widget.streamController.stream,
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return SizedBox.shrink();
@@ -125,9 +128,9 @@ class SearchFieldState extends State<SearchField> {
                 itemBuilder: (context, index) {
                   return TextButton(
                     onPressed: () {
-                      _controller.text = snapshot.data![index];
-                      _streamController.add([]);
-                      FocusScope.of(context).unfocus();
+                      _textController.text = snapshot.data![index];
+                      suggestionResults = [snapshot.data![index]];
+                      widget.streamController.add([]);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -136,7 +139,11 @@ class SearchFieldState extends State<SearchField> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(snapshot.data![index]),
+                        Text(
+                          snapshot.data![index],
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                        ),
                       ],
                     ),
                   );

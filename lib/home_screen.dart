@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/search_bar.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
@@ -5,12 +7,15 @@ import 'package:f_aviation_accidents/api.dart';
 import 'package:f_aviation_accidents/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   List<AccidentTile> data = [];
+  final StreamController<List<String>> _streamController = StreamController();
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
   int currentIndex = 0;
@@ -32,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _streamController.close();
     super.dispose();
   }
 
@@ -113,14 +119,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Positioned(
                     top: 0.0,
-                    left: 0,
-                    right: 0,
+                    left: 0.0,
+                    right: 0.0,
                     child: Container(
                       padding: EdgeInsets.all(15.0),
                       decoration: BoxDecoration(
                         color: Colors.white.withAlpha(0),
                       ),
-                      child: SearchField(),
+                      child: SearchField(streamController: _streamController),
                     ),
                   ),
                 ],
