@@ -27,7 +27,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/avcc_app_icon.png"
+  image_path_ios: "assets/icons/avcc_app_icon512.png"
+  image_path_android: "assets/icons/avcc_app_icon1024.png"
   min_sdk_android: 21
   remove_alpha_ios: true
 
@@ -37,4 +38,5 @@ flutter:
 
   assets:
     - .env
-    - assets/icons/avcc_app_icon.png
+    - assets/icons/avcc_app_icon512.png
+    - assets/icons/avcc_app_icon1024.png
