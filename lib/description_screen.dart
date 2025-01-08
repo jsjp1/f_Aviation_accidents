@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:f_aviation_accidents/api.dart';
 import 'package:flutter/material.dart';
-import 'package:f_aviation_accidents/aircraft_status.dart';
 
 class AccidentWithDescription extends Accident {
   String description;
