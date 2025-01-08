@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:f_aviation_accidents/api.dart';
+import 'package:f_aviation_accidents/drawer.dart';
 import 'package:flutter/material.dart';
 
 class AccidentWithDescription extends Accident {
@@ -103,14 +104,19 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
-                    child: IconButton(
-                      icon: Icon(Icons.menu),
-                      iconSize: 30.0,
-                      // TODO: 메뉴
-                      onPressed: () {},
-                    ),
+                  Builder(
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                        child: IconButton(
+                          icon: Icon(Icons.menu),
+                          iconSize: 30.0,
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -148,6 +154,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
           ],
         ),
       ),
+      endDrawer: AvccDrawer(),
     );
   }
 }

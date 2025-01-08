@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:intl/intl.dart';
+import 'package:f_aviation_accidents/drawer.dart';
 
 class Stats {
   String airline = "";
@@ -72,14 +73,19 @@ class StatsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
-                  child: IconButton(
-                    icon: Icon(Icons.menu),
-                    iconSize: 30.0,
-                    // TODO: 메뉴
-                    onPressed: () {},
-                  ),
+                Builder(
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                      child: IconButton(
+                        icon: Icon(Icons.menu),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -154,6 +160,7 @@ class StatsScreen extends StatelessWidget {
           ],
         ),
       ),
+      endDrawer: AvccDrawer(),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/search_bar.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:f_aviation_accidents/api.dart';
+import 'package:f_aviation_accidents/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -55,52 +56,59 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
-            child: IconButton(
-              icon: Icon(Icons.menu),
-              iconSize: 30.0,
-              // TODO: 메뉴
-              onPressed: () {},
-            ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(15.0, 90.0, 15.0, 0.0),
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    itemCount: data.length + (_isLoading ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < data.length) {
-                        return data[index];
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Builder(
+              builder: (BuildContext context) {
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                  child: IconButton(
+                    icon: Icon(Icons.menu),
+                    iconSize: 30.0,
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
                     },
                   ),
-                ),
-                Positioned(
-                  top: 0.0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withAlpha(0),
-                    ),
-                    child: SearchField(),
-                  ),
-                ),
-              ],
+                );
+              },
             ),
-          ),
-        ],
-      )),
+            Expanded(
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15.0, 90.0, 15.0, 0.0),
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: data.length + (_isLoading ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < data.length) {
+                          return data[index];
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    top: 0.0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withAlpha(0),
+                      ),
+                      child: SearchField(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      endDrawer: AvccDrawer(),
     );
   }
 }
