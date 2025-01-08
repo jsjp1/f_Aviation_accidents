@@ -13,6 +13,7 @@ class SearchFieldState extends State<SearchField> {
   final TextEditingController _controller = TextEditingController();
   final StreamController<List<String>> _streamController = StreamController();
   Timer? _debounce;
+  late List<String> suggestionResults = [];
 
   @override
   void dispose() {
@@ -31,8 +32,8 @@ class SearchFieldState extends State<SearchField> {
         return;
       }
 
-      final results = await fetchSuggestions(query);
-      _streamController.add(results);
+      suggestionResults = await fetchSuggestions(query);
+      _streamController.add(suggestionResults);
     });
   }
 
@@ -57,6 +58,13 @@ class SearchFieldState extends State<SearchField> {
             ),
           ),
           onChanged: _onSearchChanged,
+          onTapOutside: (event) {
+            _streamController.add([]);
+            FocusScope.of(context).unfocus();
+          },
+          onTap: () {
+            _streamController.add(suggestionResults);
+          },
           onSubmitted: (value) async {
             if (value.isNotEmpty) {
               List<dynamic> response = await fetchInformation(value);
@@ -100,7 +108,7 @@ class SearchFieldState extends State<SearchField> {
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15.0), // 둥근 모서리
+                borderRadius: BorderRadius.circular(15.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey,

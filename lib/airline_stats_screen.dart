@@ -65,7 +65,7 @@ class StatsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(20.0, 30.0, 0.0, 0.0),
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
                     onPressed: () {
@@ -76,7 +76,7 @@ class StatsScreen extends StatelessWidget {
                 Builder(
                   builder: (BuildContext context) {
                     return Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(0.0, 30.0, 20.0, 0.0),
                       child: IconButton(
                         icon: Icon(Icons.menu),
                         iconSize: 30.0,

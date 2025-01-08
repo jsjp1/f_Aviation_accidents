@@ -6,13 +6,25 @@ class AvccDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      surfaceTintColor: Colors.lightBlueAccent,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            child: Text('Temp Header'),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage("assets/icons/avcc_app_icon512.png"),
+                    width: 50.0,
+                  ),
+                  Text("AVCC"),
+                ],
+              ),
             ),
           ),
           ListTile(

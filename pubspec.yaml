@@ -40,3 +40,5 @@ flutter:
     - .env
     - assets/icons/avcc_app_icon512.png
     - assets/icons/avcc_app_icon1024.png
+    - assets/icons/avcc_app_icon_monochrome.png
+    - assets/icons/avcc_app_icon_foreground.png

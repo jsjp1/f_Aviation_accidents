@@ -59,19 +59,40 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Builder(
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
-                  child: IconButton(
-                    icon: Icon(Icons.menu),
-                    iconSize: 30.0,
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 70.0,
+                  height: 70.0,
+                ),
+                SizedBox(
+                  width: 90.0,
+                  height: 90.0,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: Image(
+                      image: AssetImage(
+                          "assets/icons/avcc_app_icon_monochrome.png"),
+                      width: 70.0,
+                    ),
                   ),
-                );
-              },
+                ),
+                Builder(
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                      child: IconButton(
+                        icon: Icon(Icons.menu),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
             Expanded(
               child: Stack(

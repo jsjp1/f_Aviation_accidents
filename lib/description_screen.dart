@@ -82,7 +82,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 30.0, 0.0, 0.0),
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back_ios),
                       onPressed: () {
@@ -92,7 +92,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                   ),
                   Flexible(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 20.0),
+                      padding: EdgeInsets.only(top: 30.0),
                       child: AutoSizeText(
                         accDescription.airline,
                         style: TextStyle(
@@ -107,7 +107,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                   Builder(
                     builder: (BuildContext context) {
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(0.0, 30.0, 20.0, 0.0),
                         child: IconButton(
                           icon: Icon(Icons.menu),
                           iconSize: 30.0,
