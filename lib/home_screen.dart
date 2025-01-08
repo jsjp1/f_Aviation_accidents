@@ -62,6 +62,7 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -70,7 +71,7 @@ class HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(
                   width: 70.0,
-                  height: 70.0,
+                  height: 90.0,
                 ),
                 SizedBox(
                   width: 90.0,
@@ -80,7 +81,8 @@ class HomeScreenState extends State<HomeScreen> {
                     child: Image(
                       image: AssetImage(
                           "assets/icons/avcc_app_icon_monochrome.png"),
-                      width: 70.0,
+                      // "assets/icons/avcc_app_icon_round.png"),
+                      width: 20.0,
                     ),
                   ),
                 ),

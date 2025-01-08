@@ -19,7 +19,7 @@ class AvccDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
-                    image: AssetImage("assets/icons/avcc_app_icon512.png"),
+                    image: AssetImage("assets/icons/avcc_app_icon_round.png"),
                     width: 50.0,
                   ),
                   Text("AVCC"),

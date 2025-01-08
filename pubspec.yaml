@@ -1,6 +1,6 @@
 name: f_aviation_accidents
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -33,7 +33,6 @@ flutter_launcher_icons:
   remove_alpha_ios: true
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -42,3 +41,4 @@ flutter:
     - assets/icons/avcc_app_icon1024.png
     - assets/icons/avcc_app_icon_monochrome.png
     - assets/icons/avcc_app_icon_foreground.png
+    - assets/icons/avcc_app_icon_round.png
