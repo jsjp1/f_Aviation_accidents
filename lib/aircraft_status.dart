@@ -40,6 +40,27 @@ const Map<String, AircraftStatus> stringToAircraftStatusMap = {
   "": AircraftStatus.empty,
 };
 
+const Map<AircraftStatus, String> enumToEnStringMap = {
+  AircraftStatus.destroyedWrittenOff: "Destroyed, written off",
+  AircraftStatus.substantialRepaired: "Substantial, repaired",
+  AircraftStatus.substantial: "Substantial",
+  AircraftStatus.substantialWrittenOff: "Substantial, written off",
+  AircraftStatus.destroyed: "Destroyed",
+  AircraftStatus.aircraftMissingWrittenOff: "Aircraft missing, written off",
+  AircraftStatus.aircraftMissing: "Aircraft missing",
+  AircraftStatus.minorRepaired: "Minor, repaired",
+  AircraftStatus.minor: "Minor",
+  AircraftStatus.minorWrittenOff: "Minor, written off",
+  AircraftStatus.none: "None",
+  AircraftStatus.noneRepaired: "None, repaired",
+  AircraftStatus.unknown: "Unknown",
+  AircraftStatus.unknownRepaired: "Unknown, repaired",
+  AircraftStatus.unknownWrittenOff: "Unknown, written off",
+  AircraftStatus.destroyedRepaired: "Destroyed, repaired",
+  AircraftStatus.unknownUnknown: "UnknownUnknown",
+  AircraftStatus.empty: "",
+};
+
 const Map<AircraftStatus, String> enumToStringMap = {
   AircraftStatus.destroyedWrittenOff: "파괴됨, 폐기",
   AircraftStatus.substantialRepaired: "상당한 피해, 수리됨",

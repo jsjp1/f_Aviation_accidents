@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.20.1
   auto_size_text: ^3.0.0
   flutter_launcher_icons: ^0.14.2
+  pie_chart: ^5.4.0
 
 dev_dependencies:
   flutter_test:

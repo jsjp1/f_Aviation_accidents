@@ -1,7 +1,9 @@
+import 'package:f_aviation_accidents/aircraft_status.dart';
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:intl/intl.dart';
 import 'package:f_aviation_accidents/drawer.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class Stats {
   String airline = "";
@@ -19,6 +21,26 @@ class Stats {
 
 class StatsScreen extends StatelessWidget {
   final List<Map<String, dynamic>> information;
+  Map<String, double> statsDataMap = {
+    "Destroyed, written off": 0,
+    "Substantial, repaired": 0,
+    "Substantial": 0,
+    "Substantial, written off": 0,
+    "Destroyed": 0,
+    "Aircraft missing, written off": 0,
+    "Aircraft missing": 0,
+    "Minor, repaired": 0,
+    "Minor": 0,
+    "Minor, written off": 0,
+    "None": 0,
+    "None, repaired": 0,
+    "Unknown": 0,
+    "Unknown, repaired": 0,
+    "Unknown, written off": 0,
+    "Destroyed, repaired": 0,
+    "UnknownUnknown": 0,
+    "": 0,
+  };
   late Stats airlineStats;
 
   StatsScreen({
@@ -44,6 +66,17 @@ class StatsScreen extends StatelessWidget {
         isStatsScreen: true,
       );
     }).toList();
+
+    for (AccidentTile acc in accidentTiles) {
+      final key = enumToEnStringMap[acc.acc.aircraftStatus];
+
+      if (key != null && statsDataMap.containsKey(key)) {
+        statsDataMap[key] = (statsDataMap[key] ?? 0) + 1;
+      } else {
+        print(
+            "Unknown or unexpected aircraftStatus: ${acc.acc.aircraftStatus}");
+      }
+    }
 
     airlineStats = Stats(
       accidentTiles: accidentTiles,
@@ -95,55 +128,93 @@ class StatsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: Text(
-                      airlineStats.airline,
-                      style: const TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      softWrap: true,
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text('총 사고 수: '),
-                      Text(
-                        airlineStats.totalAccidentsCount.toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * (0.6),
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 20.0),
+                          child: Text(
+                            airlineStats.airline,
+                            style: const TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            softWrap: true,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            PieChart(
+                              dataMap: statsDataMap,
+                              chartType: ChartType.ring,
+                              ringStrokeWidth: 10,
+                              chartRadius:
+                                  MediaQuery.of(context).size.width / 5,
+                              legendOptions: LegendOptions(
+                                showLegendsInRow: false,
+                                showLegends: false,
+                              ),
+                              chartValuesOptions: ChartValuesOptions(
+                                showChartValueBackground: true,
+                                showChartValues: true,
+                                showChartValuesInPercentage: false,
+                                showChartValuesOutside: true,
+                                decimalPlaces: 0,
+                              ),
+                            ),
+                            // SizedBox(width: 30.0),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  Row(
+                  const SizedBox(height: 10.0),
+                  Column(
                     children: [
-                      const Text('총 사망자 수: '),
-                      Text(
-                        airlineStats.totalFatalities.toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          const Text('총 사고 수: '),
+                          Text(
+                            airlineStats.totalAccidentsCount.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
+                      Row(
+                        children: [
+                          const Text('총 사망자 수: '),
+                          Text(
+                            airlineStats.totalFatalities.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('마지막 사고 발생 시각: '),
+                          Text(
+                            airlineStats.accidentTiles.isNotEmpty
+                                ? DateFormat('yyyy-MM-dd HH:mm').format(
+                                    airlineStats.accidentTiles.first.dateTime)
+                                : "",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Text('마지막 사고 발생 시각: '),
-                      Text(
-                        airlineStats.accidentTiles.isNotEmpty
-                            ? DateFormat('yyyy-MM-dd HH:mm').format(
-                                airlineStats.accidentTiles.first.dateTime)
-                            : "",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20.0),
                 ],
               ),
             ),
@@ -157,7 +228,7 @@ class StatsScreen extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

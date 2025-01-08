@@ -109,6 +109,7 @@ class SearchFieldState extends State<SearchField> {
               return SizedBox.shrink();
             }
             return Container(
+              height: snapshot.data!.length * 50.0,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15.0),
