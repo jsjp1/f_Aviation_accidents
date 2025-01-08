@@ -5,6 +5,7 @@ import 'package:f_aviation_accidents/search_bar.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
 import 'package:f_aviation_accidents/api.dart';
 import 'package:f_aviation_accidents/drawer.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<AccidentTile> data = [];
+  late List<AccidentTile> data = [];
+  Image todayAppbarIcon = Image(
+    image: AssetImage(
+      "assets/icons/avcc_app_icon_monochrome.png",
+    ),
+    width: 20.0,
+  );
   final StreamController<List<String>> _streamController = StreamController();
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
@@ -23,7 +30,9 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     _loadMoreData();
+    _changeIconTodayAccident();
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
@@ -78,12 +87,7 @@ class HomeScreenState extends State<HomeScreen> {
                   height: 90.0,
                   child: Padding(
                     padding: EdgeInsets.only(top: 20.0),
-                    child: Image(
-                      image: AssetImage(
-                          "assets/icons/avcc_app_icon_monochrome.png"),
-                      // "assets/icons/avcc_app_icon_round.png"),
-                      width: 20.0,
-                    ),
+                    child: todayAppbarIcon,
                   ),
                 ),
                 Builder(
@@ -139,5 +143,21 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       endDrawer: AvccDrawer(),
     );
+  }
+
+  Future<void> _changeIconTodayAccident() async {
+    final DateFormat ymdFormat = DateFormat('yyyy-MM-dd');
+    final String today = ymdFormat.format(DateTime.now());
+    final AccidentTile lastAccident = await fetchAccident(today);
+
+    final String lastAccidentDate = ymdFormat.format(lastAccident.acc.date);
+
+    if (today == lastAccidentDate) {
+      todayAppbarIcon = Image(
+        image: AssetImage("assets/icons/avcc_app_icon_monochrome.png"),
+        color: Colors.red,
+        width: 20.0,
+      );
+    }
   }
 }

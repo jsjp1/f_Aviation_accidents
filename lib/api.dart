@@ -53,6 +53,42 @@ Future<List<dynamic>> fetchInformation(String airline) async {
   }
 }
 
+Future<AccidentTile> fetchAccident(String ymdDate) async {
+  final _url = "${dotenv.env["SERVER_HOST"]!}/api/accident/$ymdDate";
+  final url = Uri.parse(_url);
+
+  try {
+    final response = await get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final hits = jsonDecode(decodeBody);
+
+      final AccidentTile acc = AccidentTile(
+        hits: hits,
+        isStatsScreen: false,
+      );
+
+      return acc;
+    } else {
+      return AccidentTile(
+        hits: [],
+        isStatsScreen: false,
+      );
+    }
+  } catch (_) {
+    return AccidentTile(
+      hits: [],
+      isStatsScreen: false,
+    );
+  }
+}
+
 Future<List<AccidentTile>> fetchAccidents(
     int currentIndex, bool isStatsScreen) async {
   final _url =
