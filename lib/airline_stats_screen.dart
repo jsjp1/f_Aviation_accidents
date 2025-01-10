@@ -1,3 +1,4 @@
+import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:f_aviation_accidents/aircraft_status.dart';
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
@@ -252,6 +253,7 @@ class StatsScreen extends StatelessWidget {
                 ),
               ),
             ),
+            BannerWidget(),
           ],
         ),
       ),

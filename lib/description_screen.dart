@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:f_aviation_accidents/api.dart';
 import 'package:f_aviation_accidents/drawer.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,8 @@ class DescriptionScreen extends StatefulWidget {
 class DescriptionScreenState extends State<DescriptionScreen> {
   late AccidentWithDescription accDescription;
   bool isLoading = true;
+  bool isKo = true;
+  String translateLanguage = "원문 보기";
 
   @override
   void initState() {
@@ -122,25 +125,46 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                 ],
               ),
             ),
-            Row(
-              children: [
-                SizedBox(width: 30.0),
-                Text(
-                  "상황",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    height: 1.5,
+            Padding(
+              padding: EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "상황",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      height: 1.5,
+                    ),
                   ),
-                ),
-              ],
+                  TextButton(
+                    child: Row(
+                      children: [
+                        Text(translateLanguage),
+                        Icon(Icons.rotate_left_rounded),
+                      ],
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (isKo == true) {
+                          translateLanguage = "한글로 보기";
+                          isKo = false;
+                        } else {
+                          translateLanguage = "원문 보기";
+                          isKo = true;
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 10.0),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(25.0),
                 child: Text(
-                  accDescription.koDescription == ""
+                  accDescription.koDescription == "" || isKo == false
                       ? accDescription.description
                       : accDescription.koDescription,
                   style: TextStyle(
@@ -152,6 +176,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                 ),
               ),
             ),
+            BannerWidget(),
           ],
         ),
       ),

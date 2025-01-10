@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/search_bar.dart';
 import 'package:f_aviation_accidents/accident_tile.dart';
@@ -135,6 +136,7 @@ class HomeScreenState extends State<HomeScreen> {
                       child: SearchField(streamController: _streamController),
                     ),
                   ),
+                  BannerWidget(),
                 ],
               ),
             ),
