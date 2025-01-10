@@ -21,27 +21,42 @@ class Stats {
 
 class StatsScreen extends StatelessWidget {
   final List<Map<String, dynamic>> information;
-  Map<String, double> statsDataMap = {
-    "Destroyed, written off": 0,
-    "Substantial, repaired": 0,
-    "Substantial": 0,
-    "Substantial, written off": 0,
-    "Destroyed": 0,
-    "Aircraft missing, written off": 0,
-    "Aircraft missing": 0,
-    "Minor, repaired": 0,
-    "Minor": 0,
-    "Minor, written off": 0,
-    "None": 0,
-    "None, repaired": 0,
-    "Unknown": 0,
-    "Unknown, repaired": 0,
-    "Unknown, written off": 0,
-    "Destroyed, repaired": 0,
-    "UnknownUnknown": 0,
-    "": 0,
-  };
   late Stats airlineStats;
+
+  final Map<String, String> statsMap = {
+    "Destroyed, written off": "Critical",
+    "Substantial, repaired": "Critical",
+    "Substantial": "Critical",
+    "Substantial, written off": "Critical",
+    "Destroyed": "Critical",
+    "Aircraft missing, written off": "Severe",
+    "Aircraft missing": "Severe",
+    "Minor, repaired": "Moderate",
+    "Minor": "Moderate",
+    "Minor, written off": "Moderate",
+    "None": "No Issue",
+    "None, repaired": "No Issue",
+    "Unknown": "No Issue",
+    "Unknown, repaired": "No Issue",
+    "Unknown, written off": "No Issue",
+    "Destroyed, repaired": "No Issue",
+    "UnknownUnknown": "Unknown",
+    "": "Unknown",
+  };
+  Map<String, double> statsDataMap = {
+    "Critical": 0,
+    "Severe": 0,
+    "Moderate": 0,
+    "No Issue": 0,
+    "Unknown": 0,
+  };
+  final colorList = <Color>[
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.blue,
+    Colors.grey,
+  ];
 
   StatsScreen({
     super.key,
@@ -68,7 +83,8 @@ class StatsScreen extends StatelessWidget {
     }).toList();
 
     for (AccidentTile acc in accidentTiles) {
-      final key = enumToEnStringMap[acc.acc.aircraftStatus];
+      final status = enumToEnStringMap[acc.acc.aircraftStatus];
+      final key = statsMap[status];
 
       if (key != null && statsDataMap.containsKey(key)) {
         statsDataMap[key] = (statsDataMap[key] ?? 0) + 1;
@@ -151,8 +167,16 @@ class StatsScreen extends StatelessWidget {
                           children: [
                             PieChart(
                               dataMap: statsDataMap,
+                              colorList: colorList,
+                              animationDuration: Duration(milliseconds: 1000),
                               chartType: ChartType.ring,
                               ringStrokeWidth: 10,
+                              centerText: "항공기\n피해",
+                              centerTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                               chartRadius:
                                   MediaQuery.of(context).size.width / 5,
                               legendOptions: LegendOptions(

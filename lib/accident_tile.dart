@@ -229,16 +229,18 @@ class AccidentTile extends StatelessWidget {
 
 Icon getAircraftStatusIcon(AircraftStatus status) {
   switch (status) {
-    case AircraftStatus.destroyedWrittenOff || AircraftStatus.destroyed:
+    case AircraftStatus.destroyedWrittenOff ||
+          AircraftStatus.destroyed ||
+          AircraftStatus.substantialWrittenOff:
       return Icon(Icons.airplanemode_off, color: Colors.red);
-    case AircraftStatus.substantialRepaired || AircraftStatus.destroyedRepaired:
-      return Icon(Icons.build, color: Colors.orange);
-    case AircraftStatus.substantial || AircraftStatus.substantialWrittenOff:
-      return Icon(Icons.airplanemode_on, color: Colors.yellow);
+    case AircraftStatus.substantial ||
+          AircraftStatus.substantialRepaired ||
+          AircraftStatus.destroyedRepaired:
+      return Icon(Icons.airplanemode_on, color: Colors.orange);
     case AircraftStatus.minor ||
           AircraftStatus.minorRepaired ||
           AircraftStatus.minorWrittenOff:
-      return Icon(Icons.airplanemode_on_rounded, color: Colors.orange);
+      return Icon(Icons.airplanemode_on_rounded, color: Colors.yellow);
     case AircraftStatus.none || AircraftStatus.noneRepaired:
       return Icon(Icons.airplanemode_on, color: Colors.blue);
     case AircraftStatus.unknown ||
