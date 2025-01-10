@@ -1,4 +1,4 @@
-package com.example.f_aviation_accidents
+package com.ellipsoid.avcc
 
 import io.flutter.embedding.android.FlutterActivity
 

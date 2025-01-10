@@ -40,15 +40,18 @@ class AccidentTile extends StatelessWidget {
         ? hits["time"]
         : "00:00";
     String rawDateTime = "${hits["date"]} $rawTime";
+
     String cleanedDateTime = rawDateTime
-        .replaceAll(RegExp(r'(c\.|LT)'), '')
+        .replaceAll(RegExp(r'[^0-9:\-\s]'), '')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
+
     DateFormat format = DateFormat("yyyy-MM-dd HH:mm");
 
     try {
       dateTime = format.parse(cleanedDateTime);
     } catch (e) {
+      print("Invalid date format: $cleanedDateTime. Error: $e");
       dateTime = DateTime(1900);
     }
 
