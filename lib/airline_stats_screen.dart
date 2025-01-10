@@ -191,7 +191,6 @@ class StatsScreen extends StatelessWidget {
                                 decimalPlaces: 0,
                               ),
                             ),
-                            // SizedBox(width: 30.0),
                           ],
                         ),
                       ),

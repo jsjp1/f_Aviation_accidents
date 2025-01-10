@@ -36,20 +36,35 @@ class AccidentTile extends StatelessWidget {
     required this.hits,
     required this.isStatsScreen,
   }) {
-    String rawTime = (hits["time"] != null && hits["time"].trim().isNotEmpty)
-        ? hits["time"]
+    String rawTime = (hits["time"] != null && hits["time"]!.trim().isNotEmpty)
+        ? hits["time"]!
         : "00:00";
+
+    rawTime = rawTime
+        .replaceAll(RegExp(r'(ca|c\.|LT)'), '')
+        .replaceAll(RegExp(r'[^0-9:]'), '')
+        .trim();
+
+    if (rawTime.isEmpty || !rawTime.contains(':')) {
+      rawTime += ":00";
+    }
+
     String rawDateTime = "${hits["date"]} $rawTime";
 
     String cleanedDateTime = rawDateTime
-        .replaceAll(RegExp(r'[^0-9:\-\s]'), '')
+        .replaceAll(RegExp(r'[^\w\s:\-]'), '')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
 
-    DateFormat format = DateFormat("yyyy-MM-dd HH:mm");
+    DateFormat formatWithDay = DateFormat("EEEE d MMMM yyyy HH:mm");
+    DateFormat fallbackFormat = DateFormat("yyyy-MM-dd HH:mm");
 
     try {
-      dateTime = format.parse(cleanedDateTime);
+      if (RegExp(r'^[A-Za-z]+ \d+ [A-Za-z]+ \d{4}').hasMatch(cleanedDateTime)) {
+        dateTime = formatWithDay.parse(cleanedDateTime);
+      } else {
+        dateTime = fallbackFormat.parse(cleanedDateTime);
+      }
     } catch (e) {
       print("Invalid date format: $cleanedDateTime. Error: $e");
       dateTime = DateTime(1900);

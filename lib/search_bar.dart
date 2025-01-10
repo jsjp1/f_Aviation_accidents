@@ -140,10 +140,14 @@ class SearchFieldState extends State<SearchField> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          snapshot.data![index],
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
+                        SizedBox(
+                          // TODO: 더 고쳐야할 것 같음
+                          width: MediaQuery.of(context).size.width * (0.78),
+                          child: Text(
+                            snapshot.data![index],
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: false,
+                          ),
                         ),
                       ],
                     ),
