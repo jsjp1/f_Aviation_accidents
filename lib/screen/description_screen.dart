@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class AccidentWithDescription extends Accident {
   String description;
-  String koDescription;
+  late String koDescription = "";
 
   AccidentWithDescription({
     required super.date,
@@ -37,8 +37,8 @@ class DescriptionScreen extends StatefulWidget {
 class DescriptionScreenState extends State<DescriptionScreen> {
   late AccidentWithDescription accDescription;
   bool isLoading = true;
-  bool isKo = true;
-  String translateLanguage = "원문 보기";
+  bool isKo = false;
+  String translateLanguage = "번역문 보기";
 
   @override
   void initState() {
@@ -47,9 +47,11 @@ class DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   Future<void> _fetchDescription() async {
+    setState(() {
+      isLoading = true;
+    });
+
     final description = await fetchDescription(widget.acc.id);
-    final koDescription =
-        await translateDescription(widget.acc.id, description);
 
     setState(() {
       accDescription = AccidentWithDescription(
@@ -61,8 +63,22 @@ class DescriptionScreenState extends State<DescriptionScreen> {
         airline: widget.acc.airline,
         aircraftStatus: widget.acc.aircraftStatus,
         description: description,
-        koDescription: koDescription,
+        koDescription: "",
       );
+      isLoading = false;
+    });
+  }
+
+  Future<void> _fetchKoDescription(String description) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final koDescription =
+        await translateDescription(widget.acc.id, description);
+
+    setState(() {
+      accDescription.koDescription = koDescription;
       isLoading = false;
     });
   }
@@ -145,16 +161,26 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                         Icon(Icons.rotate_left_rounded),
                       ],
                     ),
-                    onPressed: () {
-                      setState(() {
-                        if (isKo == true) {
-                          translateLanguage = "한글로 보기";
+                    onPressed: () async {
+                      if (isKo) {
+                        setState(() {
+                          translateLanguage = "번역문 보기";
                           isKo = false;
+                        });
+                      } else {
+                        if (accDescription.koDescription == "") {
+                          await _fetchKoDescription(accDescription.description);
+                          setState(() {
+                            translateLanguage = "원문 보기";
+                            isKo = true;
+                          });
                         } else {
-                          translateLanguage = "원문 보기";
-                          isKo = true;
+                          setState(() {
+                            translateLanguage = "원문 보기";
+                            isKo = true;
+                          });
                         }
-                      });
+                      }
                     },
                   ),
                 ],

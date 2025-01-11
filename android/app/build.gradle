@@ -5,21 +5,14 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-// def flutterCompileSdkVersion = localProperties.getProperty('flutter.flutterCompileSdkVersion')
-// if(flutterCompileSdkVersion == null){
-//     flutterCompileSdkVersion = '34'
-// }
-// def flutterTargetSdkVersion = localProperties.getProperty('flutter.flutterTargetSdkVersion')
-// if (flutterTargetSdkVersion == null) {
-//     flutterTargetSdkVersion = '34'
-// }
-// def flutterMinSdkVersion = localProperties.getProperty('flutter.flutterMinSdkVersion')
-// if (flutterMinSdkVersion == null) {
-//     flutterMinSdkVersion = '23'
-// }
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+   keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
-    namespace = "com.ellipsoid.avcc"
+    namespace = "com.ellipsoid.f_aviation_accidents"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -33,18 +26,28 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.ellipsoid.avcc"
+        applicationId = "com.ellipsoid.f_aviation_accidents"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            // signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.release
         }
     }
 }

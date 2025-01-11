@@ -27,9 +27,9 @@ class Accident {
 
 class AccidentTile extends StatelessWidget {
   final dynamic hits;
-  late DateTime dateTime;
-  late Accident acc;
-  late bool isStatsScreen;
+  final bool isStatsScreen;
+  late final DateTime dateTime;
+  late final Accident acc;
 
   AccidentTile({
     super.key,

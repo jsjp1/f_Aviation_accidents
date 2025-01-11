@@ -1,3 +1,4 @@
+import 'package:f_aviation_accidents/appversion_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,6 +54,17 @@ class AvccDrawer extends StatelessWidget {
             onTap: () {
               _launchUrl("${dotenv.env["AVIATION_SAFETY_HOST"]}");
             },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.check,
+            ),
+            title: Text("버전"),
+            trailing: Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: AppVersionWidget(),
+            ),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
           ),
         ],
       ),

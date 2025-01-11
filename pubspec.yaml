@@ -1,5 +1,5 @@
 name: f_aviation_accidents
-description: "A new Flutter project."
+description: "Viewing Accident Lists and Statistical Information by Airline."
 publish_to: "none"
 
 version: 1.0.0+1
@@ -20,6 +20,7 @@ dependencies:
   pie_chart: ^5.4.0
   url_launcher: ^6.3.1
   google_mobile_ads: ^5.2.0
+  package_info_plus: ^8.1.2
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ellipsoid.avcc">
+    package="com.ellipsoid.f_aviation_accidents">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="f_aviation_accidents"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <!-- EDIT FOR GOOGLE ADS -->
         <!-- <meta-data
-            android:name="com.google.android.gms.ads.avcc"
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2472753985077329~3857560973" /> -->
         <!-- EDIT FOR GOOGLE ADS TEST -->
         <meta-data
@@ -52,12 +53,10 @@
         </intent>
     </queries>
     <queries>
-        <!-- If your app opens https URLs -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
-        <!-- If your app sends emails -->
         <intent>
             <action android:name="android.intent.action.SEND" />
             <data android:mimeType="*/*" />

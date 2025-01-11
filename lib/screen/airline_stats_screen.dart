@@ -22,7 +22,7 @@ class Stats {
 
 class StatsScreen extends StatelessWidget {
   final List<Map<String, dynamic>> information;
-  late Stats airlineStats;
+  late final Stats airlineStats;
 
   final Map<String, String> statsMap = {
     "Destroyed, written off": "Critical",
@@ -44,7 +44,7 @@ class StatsScreen extends StatelessWidget {
     "UnknownUnknown": "Unknown",
     "": "Unknown",
   };
-  Map<String, double> statsDataMap = {
+  final Map<String, double> statsDataMap = {
     "Critical": 0,
     "Severe": 0,
     "Moderate": 0,
