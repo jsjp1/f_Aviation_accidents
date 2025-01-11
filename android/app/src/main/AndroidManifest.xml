@@ -2,7 +2,7 @@
     package="com.ellipsoid.f_aviation_accidents">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="f_aviation_accidents"
+        android:label="플라이트 세이프 - 항공사별 사고 조회"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <!-- EDIT FOR GOOGLE ADS -->
