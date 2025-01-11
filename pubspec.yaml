@@ -16,7 +16,6 @@ dependencies:
   flutter_dotenv: ^5.2.1
   intl: ^0.20.1
   auto_size_text: ^3.0.0
-  flutter_launcher_icons: ^0.14.2
   pie_chart: ^5.4.0
   url_launcher: ^6.3.1
   google_mobile_ads: ^5.2.0
@@ -27,14 +26,6 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path_ios: "assets/icons/avcc_app_icon512.png"
-  image_path_android: "assets/icons/avcc_app_icon1024.png"
-  min_sdk_android: 21
-  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
