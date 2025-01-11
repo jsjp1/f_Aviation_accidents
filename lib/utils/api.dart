@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
-import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/components/accident_tile.dart';
 
 Future<List<String>> fetchSuggestions(String query) async {
   String _url = "${dotenv.env["SERVER_HOST"]!}/api/suggestions/$query";

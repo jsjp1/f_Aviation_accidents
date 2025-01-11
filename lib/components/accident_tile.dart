@@ -1,9 +1,9 @@
-import 'package:f_aviation_accidents/airline_stats_screen.dart';
-import 'package:f_aviation_accidents/api.dart';
+import 'package:f_aviation_accidents/screen/airline_stats_screen.dart';
+import 'package:f_aviation_accidents/utils/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:f_aviation_accidents/aircraft_status.dart';
-import 'package:f_aviation_accidents/description_screen.dart';
+import 'package:f_aviation_accidents/utils/aircraft_status.dart';
+import 'package:f_aviation_accidents/screen/description_screen.dart';
 
 class Accident {
   late DateTime date;

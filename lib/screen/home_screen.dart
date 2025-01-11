@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:f_aviation_accidents/search_bar.dart';
-import 'package:f_aviation_accidents/accident_tile.dart';
-import 'package:f_aviation_accidents/api.dart';
-import 'package:f_aviation_accidents/drawer.dart';
+import 'package:f_aviation_accidents/components/search_bar.dart';
+import 'package:f_aviation_accidents/components/accident_tile.dart';
+import 'package:f_aviation_accidents/utils/api.dart';
+import 'package:f_aviation_accidents/components/drawer.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/components/accident_tile.dart';
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
-import 'package:f_aviation_accidents/api.dart';
-import 'package:f_aviation_accidents/drawer.dart';
+import 'package:f_aviation_accidents/utils/api.dart';
+import 'package:f_aviation_accidents/components/drawer.dart';
 import 'package:flutter/material.dart';
 
 class AccidentWithDescription extends Accident {

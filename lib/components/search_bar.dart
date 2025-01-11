@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:f_aviation_accidents/api.dart';
-import 'package:f_aviation_accidents/airline_stats_screen.dart';
+import 'package:f_aviation_accidents/utils/api.dart';
+import 'package:f_aviation_accidents/screen/airline_stats_screen.dart';
 
 class SearchField extends StatefulWidget {
   final StreamController<List<String>> streamController;

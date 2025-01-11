@@ -1,9 +1,9 @@
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
-import 'package:f_aviation_accidents/aircraft_status.dart';
+import 'package:f_aviation_accidents/utils/aircraft_status.dart';
 import 'package:flutter/material.dart';
-import 'package:f_aviation_accidents/accident_tile.dart';
+import 'package:f_aviation_accidents/components/accident_tile.dart';
 import 'package:intl/intl.dart';
-import 'package:f_aviation_accidents/drawer.dart';
+import 'package:f_aviation_accidents/components/drawer.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class Stats {
