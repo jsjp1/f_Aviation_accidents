@@ -243,17 +243,21 @@ class StatsScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
-                child: ListView.builder(
-                  itemCount: airlineStats.accidentTiles.length,
-                  itemBuilder: (context, index) {
-                    return airlineStats.accidentTiles[index];
-                  },
-                ),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                    child: ListView.builder(
+                      itemCount: airlineStats.accidentTiles.length,
+                      itemBuilder: (context, index) {
+                        return airlineStats.accidentTiles[index];
+                      },
+                    ),
+                  ),
+                  BannerWidget(),
+                ],
               ),
             ),
-            BannerWidget(),
           ],
         ),
       ),

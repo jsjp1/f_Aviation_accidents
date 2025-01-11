@@ -187,22 +187,26 @@ class DescriptionScreenState extends State<DescriptionScreen> {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(25.0),
-                child: Text(
-                  accDescription.koDescription == "" || isKo == false
-                      ? accDescription.description
-                      : accDescription.koDescription,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    height: 1.5,
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(25.0),
+                    child: Text(
+                      accDescription.koDescription == "" || isKo == false
+                          ? accDescription.description
+                          : accDescription.koDescription,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        height: 1.5,
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
                   ),
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
-                ),
+                  BannerWidget(),
+                ],
               ),
             ),
-            BannerWidget(),
           ],
         ),
       ),
