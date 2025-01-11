@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdHelper {
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/6300978111';
+      return "${dotenv.env["TEST_BANNER_AD_ID_ANDROID"]}";
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/2934735716';
+      return "${dotenv.env["TEST_BANNER_AD_ID_IOS"]}";
     } else {
       throw UnsupportedError('Unsupported platform');
     }
@@ -16,19 +17,9 @@ class AdHelper {
 
   static String get interstitialAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/1033173712';
+      return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_ANDROID"]}";
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/4411468910';
-    } else {
-      throw UnsupportedError('Unsupported platform');
-    }
-  }
-
-  static String get rewardedAdUnitId {
-    if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/5224354917';
-    } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/1712485313';
+      return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_IOS"]}";
     } else {
       throw UnsupportedError('Unsupported platform');
     }
