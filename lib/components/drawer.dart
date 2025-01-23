@@ -25,7 +25,14 @@ class AvccDrawer extends StatelessWidget {
                     image: AssetImage("assets/icons/avcc_app_icon_round.png"),
                     width: 50.0,
                   ),
-                  Text("AVCC"),
+                  SizedBox(height: 10.0),
+                  Text(
+                    "Flight Safe",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.0,
+                    ),
+                  ),
                 ],
               ),
             ),

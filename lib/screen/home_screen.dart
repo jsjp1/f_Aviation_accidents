@@ -150,8 +150,8 @@ class HomeScreenState extends State<HomeScreen> {
   Future<void> _changeIconTodayAccident() async {
     final DateFormat ymdFormat = DateFormat('yyyy-MM-dd');
     final String today = ymdFormat.format(DateTime.now());
-    final AccidentTile lastAccident = await fetchAccident(today);
 
+    final AccidentTile lastAccident = await fetchAccident();
     final String lastAccidentDate = ymdFormat.format(lastAccident.acc.date);
 
     if (today == lastAccidentDate) {

@@ -6,13 +6,13 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <!-- EDIT FOR GOOGLE ADS -->
-        <!-- <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2472753985077329~3857560973" /> -->
-        <!-- EDIT FOR GOOGLE ADS TEST -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-2472753985077329~3857560973" />
+        <!-- EDIT FOR GOOGLE ADS TEST -->
+        <!-- <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" /> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

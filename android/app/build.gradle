@@ -14,7 +14,8 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.ellipsoid.f_aviation_accidents"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
+    // ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -29,8 +30,10 @@ android {
         applicationId = "com.ellipsoid.f_aviation_accidents"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+//        versionCode = flutter.versionCode
+//        versionName = flutter.versionName
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     signingConfigs {

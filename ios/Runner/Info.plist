@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<!-- EDIT FOR GOOGLE ADS -->
-	<!-- <key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-2472753985077329~1294976819</string> -->
-	<!-- EDIT FOR GOOGLE ADS TEST -->
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-2472753985077329~1294976819</string>
+	<!-- EDIT FOR GOOGLE ADS TEST -->
+	<!-- <key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string> -->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>com.apple.security.network.client</key>

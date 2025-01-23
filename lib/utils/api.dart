@@ -53,8 +53,8 @@ Future<List<dynamic>> fetchInformation(String airline) async {
   }
 }
 
-Future<AccidentTile> fetchAccident(String ymdDate) async {
-  final _url = "${dotenv.env["SERVER_HOST"]!}/api/accident/$ymdDate";
+Future<AccidentTile> fetchAccident() async {
+  final _url = "${dotenv.env["SERVER_HOST"]!}/api/accident";
   final url = Uri.parse(_url);
 
   try {

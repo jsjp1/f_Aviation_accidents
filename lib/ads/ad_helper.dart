@@ -7,9 +7,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdHelper {
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return "${dotenv.env["TEST_BANNER_AD_ID_ANDROID"]}";
+      // return "${dotenv.env["TEST_BANNER_AD_ID_ANDROID"]}";
+      return "${dotenv.env["BANNER_AD_ID_ANDROID"]}";
     } else if (Platform.isIOS) {
-      return "${dotenv.env["TEST_BANNER_AD_ID_IOS"]}";
+      // return "${dotenv.env["TEST_BANNER_AD_ID_IOS"]}";
+      return "${dotenv.env["BANNER_AD_ID_IOS"]}";
     } else {
       throw UnsupportedError('Unsupported platform');
     }
@@ -17,9 +19,11 @@ class AdHelper {
 
   static String get interstitialAdUnitId {
     if (Platform.isAndroid) {
-      return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_ANDROID"]}";
+      // return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_ANDROID"]}";
+      return "${dotenv.env["INTERSTITIAL_AD_ID_ANDROID"]}";
     } else if (Platform.isIOS) {
-      return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_IOS"]}";
+      // return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_IOS"]}";
+      return "${dotenv.env["INTERSTITIAL_AD_ID_IOS"]}";
     } else {
       throw UnsupportedError('Unsupported platform');
     }
