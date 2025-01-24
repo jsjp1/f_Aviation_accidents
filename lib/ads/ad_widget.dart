@@ -27,7 +27,7 @@ class BannerWidgetState extends State<BannerWidget> {
           });
         },
         onAdFailedToLoad: (ad, err) {
-          print("Failed to load a banner ad: ${err.message}");
+          debugPrint("Failed to load a banner ad: ${err.message}");
           ad.dispose();
         },
       ),

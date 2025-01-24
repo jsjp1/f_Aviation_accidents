@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
 import 'package:f_aviation_accidents/components/accident_tile.dart';
@@ -234,7 +235,7 @@ Future<void> updateKoreanDescription(String id, String description) async {
       final hits = jsonDecode(response.body);
 
       if (hits["status"] != "success") {
-        print("Error while update korean description.");
+        debugPrint("Error while update korean description.");
       }
 
       return;

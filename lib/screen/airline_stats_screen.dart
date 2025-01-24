@@ -90,7 +90,7 @@ class StatsScreen extends StatelessWidget {
       if (key != null && statsDataMap.containsKey(key)) {
         statsDataMap[key] = (statsDataMap[key] ?? 0) + 1;
       } else {
-        print(
+        debugPrint(
             "Unknown or unexpected aircraftStatus: ${acc.acc.aircraftStatus}");
       }
     }

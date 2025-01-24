@@ -66,7 +66,7 @@ class AccidentTile extends StatelessWidget {
         dateTime = fallbackFormat.parse(cleanedDateTime);
       }
     } catch (e) {
-      print("Invalid date format: $cleanedDateTime. Error: $e");
+      debugPrint("Invalid date format: $cleanedDateTime. Error: $e");
       dateTime = DateTime(1900);
     }
 
@@ -138,7 +138,7 @@ class AccidentTile extends StatelessWidget {
                     message: enumToStringMap[acc.aircraftStatus],
                     child: GestureDetector(
                       onTap: () {
-                        print("Aircraft status: ${acc.aircraftStatus}");
+                        debugPrint("Aircraft status: ${acc.aircraftStatus}");
                       },
                       child: getAircraftStatusIcon(acc.aircraftStatus),
                     ),
