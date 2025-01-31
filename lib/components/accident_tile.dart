@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:f_aviation_accidents/screen/airline_stats_screen.dart';
 import 'package:f_aviation_accidents/utils/api.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,15 @@ class AccidentTile extends StatelessWidget {
   late final DateTime dateTime;
   late final Accident acc;
 
+  final InterstitialAdManager adManager = InterstitialAdManager();
+
   AccidentTile({
     super.key,
     required this.hits,
     required this.isStatsScreen,
   }) {
+    adManager.initAd();
+
     String rawTime = (hits["time"] != null && hits["time"]!.trim().isNotEmpty)
         ? hits["time"]!
         : "00:00";
@@ -110,7 +115,9 @@ class AccidentTile extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => DescriptionScreen(acc: acc),
           ),
-        );
+        ).then((_) {
+          adManager.showAdIfNeeded();
+        });
       },
       child: Padding(
         padding: EdgeInsets.all(8.0),
@@ -165,7 +172,9 @@ class AccidentTile extends StatelessWidget {
                                 builder: (context) =>
                                     StatsScreen(information: listMapResponse),
                               ),
-                            );
+                            ).then((_) {
+                              adManager.showAdIfNeeded();
+                            });
                           }
                         },
                         child: Text(

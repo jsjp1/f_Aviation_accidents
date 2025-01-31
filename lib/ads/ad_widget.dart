@@ -52,3 +52,40 @@ class BannerWidgetState extends State<BannerWidget> {
     );
   }
 }
+
+class InterstitialAdManager {
+  static int maxCounter = 5;
+  int screenTransitionCounter = 0;
+  InterstitialAd? _interstitialAd;
+
+  void initAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _interstitialAd = null;
+        },
+      ),
+    );
+  }
+
+  void showAdIfNeeded() {
+    screenTransitionCounter++;
+    debugPrint("$screenTransitionCounter");
+    if (screenTransitionCounter >= maxCounter) {
+      if (_interstitialAd != null) {
+        _interstitialAd!.show();
+        _interstitialAd = null;
+        if (maxCounter <= 7) {
+          maxCounter++;
+        }
+        initAd();
+      }
+      screenTransitionCounter = 0;
+    }
+  }
+}
