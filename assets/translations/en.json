@@ -1,0 +1,24 @@
+{
+  "search_field_find_airline_text": "Enter the airline name.",
+
+  "stats_screen_total_accidents_count": "Total accident count: ",
+  "stats_screen_total_fatal_count": "Total fatalities: ",
+  "stats_screen_last_accident_time": "Last accident occurrence time: ",
+  "stats_screen_date": "Date: ",
+  "stats_screen_location": "Location: ",
+  "stats_screen_fatal_count": "Fatalities: ",
+  "stats_screen_occupant_count": "Occupant count: ",
+  "stats_screen_aircraft_damage": "Aircraft\nDamage",
+
+  "drawer_app_name": "Flight Safe",
+  "drawer_feedback_text": "Provide feedback and suggestions",
+  "drawer_copyright": "Copyright",
+  "drawer_version": "Version",
+
+  "description_screen_case": "Case",
+  "description_screen_toggle_to_en": "View original text",
+  "description_screen_toggle_to_ko": "View translation",
+
+  "snack_bar_no_airline_text": "No airline found.",
+  "snack_bar_need_input_text": "Input is required!"
+}

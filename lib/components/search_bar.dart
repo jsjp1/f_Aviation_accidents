@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/utils/api.dart';
 import 'package:f_aviation_accidents/screen/airline_stats_screen.dart';
@@ -59,7 +60,7 @@ class SearchFieldState extends State<SearchField> {
                 FocusScope.of(context).unfocus();
               },
             ),
-            hintText: "항공사명을 입력해보세요.",
+            hintText: "search_field_find_airline_text.".tr(),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -78,7 +79,7 @@ class SearchFieldState extends State<SearchField> {
                   response = await fetchInformation(suggestionAirline[0]);
                 } catch (_) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("항공사가 존재하지 않습니다.")),
+                    SnackBar(content: Text("snack_bar_no_airline_text").tr()),
                   );
                   return;
                 }
@@ -97,7 +98,7 @@ class SearchFieldState extends State<SearchField> {
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("입력값이 필요합니다!")),
+                SnackBar(content: Text("snack_bar_need_input_text").tr()),
               );
             }
           },

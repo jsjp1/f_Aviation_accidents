@@ -1,0 +1,24 @@
+{
+  "search_field_find_airline_text": "항공사명을 입력해보세요.",
+
+  "stats_screen_total_accidents_count": "총 사고 수: ",
+  "stats_screen_total_fatal_count": "총 사망자 수: ",
+  "stats_screen_last_accident_time": "마지막 사고 발생 시각: ",
+  "stats_screen_date": "날짜: ",
+  "stats_screen_location": "위치: ",
+  "stats_screen_fatal_count": "사망자 수: ",
+  "stats_screen_occupant_count": "탑승자 수: ",
+  "stats_screen_aircraft_damage": "항공기\n피해",
+
+  "drawer_app_name": "플라이트 세이프",
+  "drawer_feedback_text": "의견 및 피드백 제공",
+  "drawer_copyright": "저작권",
+  "drawer_version": "버전",
+
+  "description_screen_case": "상황",
+  "description_screen_toggle_to_en": "원문 보기",
+  "description_screen_toggle_to_ko": "번역문 보기",
+
+  "snack_bar_no_airline_text": "항공사가 존재하지 않습니다.",
+  "snack_bar_need_input_text": "입력값이 필요합니다!"
+}

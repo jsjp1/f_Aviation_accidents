@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:f_aviation_accidents/utils/aircraft_status.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +173,7 @@ class StatsScreen extends StatelessWidget {
                               animationDuration: Duration(milliseconds: 1000),
                               chartType: ChartType.ring,
                               ringStrokeWidth: 10,
-                              centerText: "항공기\n피해",
+                              centerText: "stats_screen_aircraft_damage".tr(),
                               centerTextStyle: TextStyle(
                                 color: Colors.black,
                                 fontSize: 10.0,
@@ -202,7 +203,7 @@ class StatsScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Text('총 사고 수: '),
+                          const Text('stats_screen_total_accidents_count').tr(),
                           Text(
                             airlineStats.totalAccidentsCount.toString(),
                             style: TextStyle(
@@ -213,7 +214,7 @@ class StatsScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text('총 사망자 수: '),
+                          const Text('stats_screen_total_fatal_count').tr(),
                           Text(
                             airlineStats.totalFatalities.toString(),
                             style: TextStyle(
@@ -224,7 +225,7 @@ class StatsScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text('마지막 사고 발생 시각: '),
+                          const Text('stats_screen_last_accident_time').tr(),
                           Text(
                             airlineStats.accidentTiles.isNotEmpty
                                 ? DateFormat('yyyy-MM-dd HH:mm').format(

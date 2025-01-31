@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:f_aviation_accidents/components/appversion_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,12 +28,12 @@ class AvccDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 10.0),
                   Text(
-                    "Flight Safe",
+                    "drawer_app_name",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13.0,
                     ),
-                  ),
+                  ).tr(),
                 ],
               ),
             ),
@@ -42,9 +43,9 @@ class AvccDrawer extends StatelessWidget {
               Icons.message,
             ),
             title: Text(
-              '의견 및 피드백 제공',
+              "drawer_feedback_text",
               style: TextStyle(),
-            ),
+            ).tr(),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
             onTap: () {
               // TODO
@@ -54,9 +55,9 @@ class AvccDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.copyright),
             title: Text(
-              '저작권',
+              "drawer_copyright",
               style: TextStyle(),
-            ),
+            ).tr(),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
             onTap: () {
               _launchUrl("${dotenv.env["AVIATION_SAFETY_HOST"]}");
@@ -66,7 +67,7 @@ class AvccDrawer extends StatelessWidget {
             leading: Icon(
               Icons.check,
             ),
-            title: Text("버전"),
+            title: Text("drawer_version").tr(),
             trailing: Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: AppVersionWidget(),

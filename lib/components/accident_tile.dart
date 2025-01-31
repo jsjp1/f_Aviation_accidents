@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:f_aviation_accidents/screen/airline_stats_screen.dart';
 import 'package:f_aviation_accidents/utils/api.dart';
 import 'package:flutter/material.dart';
@@ -189,9 +190,9 @@ class AccidentTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '날짜:',
+                    "stats_screen_date",
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   Text(DateFormat('yyyy-MM-dd HH:mm').format(acc.date)),
                 ],
               ),
@@ -200,9 +201,9 @@ class AccidentTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '위치:',
+                    "stats_screen_location",
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   Expanded(
                     child: Text(
                       acc.location,
@@ -217,9 +218,9 @@ class AccidentTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '사망자 수:',
+                    "stats_screen_fatal_count",
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   Text(acc.fatalities.toString()),
                 ],
               ),
@@ -228,9 +229,9 @@ class AccidentTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '탑승자 수:',
+                    "stats_screen_occupant_count",
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   Text(acc.occupants.toString()),
                 ],
               ),

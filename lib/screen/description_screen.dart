@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:f_aviation_accidents/components/accident_tile.dart';
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
 import 'package:f_aviation_accidents/utils/api.dart';
@@ -38,7 +39,7 @@ class DescriptionScreenState extends State<DescriptionScreen> {
   late AccidentWithDescription accDescription;
   bool isLoading = true;
   bool isKo = false;
-  String translateLanguage = "번역문 보기";
+  String translateLanguage = "description_screen_toggle_to_ko";
 
   @override
   void initState() {
@@ -147,36 +148,38 @@ class DescriptionScreenState extends State<DescriptionScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "상황",
+                    "description_screen_case",
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       height: 1.5,
                     ),
-                  ),
+                  ).tr(),
                   TextButton(
                     child: Row(
                       children: [
-                        Text(translateLanguage),
+                        Text(translateLanguage).tr(),
                         Icon(Icons.rotate_left_rounded),
                       ],
                     ),
                     onPressed: () async {
                       if (isKo) {
                         setState(() {
-                          translateLanguage = "번역문 보기";
+                          translateLanguage = "description_screen_toggle_to_ko";
                           isKo = false;
                         });
                       } else {
                         if (accDescription.koDescription == "") {
                           await _fetchKoDescription(accDescription.description);
                           setState(() {
-                            translateLanguage = "원문 보기";
+                            translateLanguage =
+                                "description_screen_toggle_to_en";
                             isKo = true;
                           });
                         } else {
                           setState(() {
-                            translateLanguage = "원문 보기";
+                            translateLanguage =
+                                "description_screen_toggle_to_en";
                             isKo = true;
                           });
                         }
