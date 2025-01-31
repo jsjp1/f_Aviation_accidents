@@ -20,5 +20,24 @@
   "description_screen_toggle_to_ko": "번역문 보기",
 
   "snack_bar_no_airline_text": "항공사가 존재하지 않습니다.",
-  "snack_bar_need_input_text": "입력값이 필요합니다!"
+  "snack_bar_need_input_text": "입력값이 필요합니다!",
+
+  "aircraft_status_dw": "파괴됨, 폐기",
+  "aircraft_status_sr": "상당한 피해, 수리됨",
+  "aircraft_status_s": "상당한 피해",
+  "aircraft_status_sw": "상당한 피해, 폐기",
+  "aircraft_status_d": "파괴됨",
+  "aircraft_status_amw": "항공기 실종, 폐기",
+  "aircraft_status_am": "항공기 실종",
+  "aircraft_status_mr": "경미한 피해, 수리됨",
+  "aircraft_status_m": "경미한 피해",
+  "aircraft_status_mw": "경미한 피해, 폐기",
+  "aircraft_status_n": "손상 없음",
+  "aircraft_status_nr": "손상 없음, 수리됨",
+  "aircraft_status_u": "알 수 없음",
+  "aircraft_status_ur": "알 수 없음, 수리됨",
+  "aircraft_status_uw": "알 수 없음, 폐기",
+  "aircraft_status_dr": "파괴됨, 수리됨",
+  "aircraft_status_uu": "알 수 없는 상태",
+  "aircraft_status_empty": ""
 }

@@ -20,5 +20,24 @@
   "description_screen_toggle_to_ko": "View translation",
 
   "snack_bar_no_airline_text": "No airline found.",
-  "snack_bar_need_input_text": "Input is required!"
+  "snack_bar_need_input_text": "Input is required!",
+
+  "aircraft_status_dw": "Destroyed, Written Off",
+  "aircraft_status_sr": "Substantial Damage, Repaired",
+  "aircraft_status_s": "Substantial Damage",
+  "aircraft_status_sw": "Substantial Damage, Written Off",
+  "aircraft_status_d": "Destroyed",
+  "aircraft_status_amw": "Aircraft Missing, Written Off",
+  "aircraft_status_am": "Aircraft Missing",
+  "aircraft_status_mr": "Minor Damage, Repaired",
+  "aircraft_status_m": "Minor Damage",
+  "aircraft_status_mw": "Minor Damage, Written Off",
+  "aircraft_status_n": "No Damage",
+  "aircraft_status_nr": "No Damage, Repaired",
+  "aircraft_status_u": "Unknown",
+  "aircraft_status_ur": "Unknown, Repaired",
+  "aircraft_status_uw": "Unknown, Written Off",
+  "aircraft_status_dr": "Destroyed, Repaired",
+  "aircraft_status_uu": "Unknown Status",
+  "aircraft_status_empty": ""
 }

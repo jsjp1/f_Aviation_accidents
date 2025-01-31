@@ -136,7 +136,7 @@ class AccidentTile extends StatelessWidget {
               Row(
                 children: [
                   Tooltip(
-                    message: enumToStringMap[acc.aircraftStatus],
+                    message: tr(enumToStringMap[acc.aircraftStatus]!),
                     child: GestureDetector(
                       onTap: () {
                         debugPrint("Aircraft status: ${acc.aircraftStatus}");
