@@ -55,7 +55,7 @@ class BannerWidgetState extends State<BannerWidget> {
 
 class InterstitialAdManager {
   static int maxCounter = 5;
-  int screenTransitionCounter = 0;
+  static int screenTransitionCounter = 0;
   InterstitialAd? _interstitialAd;
 
   void initAd() {

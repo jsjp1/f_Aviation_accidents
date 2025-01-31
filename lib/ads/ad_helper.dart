@@ -8,6 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdHelper {
   static String get bannerAdUnitId {
     if (kDebugMode) {
+      debugPrint("Now in debug mode.");
       if (Platform.isAndroid) {
         return "${dotenv.env["TEST_BANNER_AD_ID_ANDROID"]}";
       } else if (Platform.isIOS) {
@@ -28,6 +29,7 @@ class AdHelper {
 
   static String get interstitialAdUnitId {
     if (kDebugMode) {
+      debugPrint("Now in debug mode.");
       if (Platform.isAndroid) {
         return "${dotenv.env["TEST_INTERSTITIAL_AD_ID_ANDROID"]}";
       } else if (Platform.isIOS) {

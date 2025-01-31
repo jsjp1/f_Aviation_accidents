@@ -67,6 +67,23 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _loadMoreDataReverse() async {
+    // List<AccidentTile> newDataReverse = [];
+
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    // // TODO:
+    // newDataReverse = await fetchAccidents(currentIndex, false);
+
+    // setState(() {
+    //   data.addAll(newData);
+    //   currentIndex += 10;
+    //   _isLoading = false;
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

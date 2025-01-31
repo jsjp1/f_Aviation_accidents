@@ -126,6 +126,43 @@ Future<List<AccidentTile>> fetchAccidents(
   }
 }
 
+// TODO:
+Future<List<AccidentTile>> fetchAccidentsReverse(
+    int currentIndex, bool isStatsScreen) async {
+  final _url =
+      "${dotenv.env["SERVER_HOST"]!}/api/accidents?start=$currentIndex&size=10";
+  final url = Uri.parse(_url);
+
+  try {
+    final response = await get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final List<dynamic> hits = jsonDecode(decodeBody);
+
+      currentIndex += hits.length;
+
+      final accidents = hits.map<AccidentTile>((hit) {
+        return AccidentTile(
+          hits: hit,
+          isStatsScreen: isStatsScreen,
+        );
+      }).toList();
+
+      return accidents;
+    } else {
+      return [];
+    }
+  } catch (_) {
+    return [];
+  }
+}
+
 Future<String> fetchDescription(String id) async {
   final _url = "${dotenv.env["SERVER_HOST"]!}/api/description/$id";
   final url = Uri.parse(_url);
