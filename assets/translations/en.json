@@ -15,6 +15,9 @@
   "drawer_copyright": "Copyright",
   "drawer_version": "Version",
 
+  "dropdown_newest": "Newest",
+  "dropdown_oldest": "Oldest",
+
   "description_screen_case": "Case",
   "description_screen_toggle_to_en": "View original text",
   "description_screen_toggle_to_ko": "View translation",

@@ -1,12 +1,29 @@
 import 'dart:async';
 
 import 'package:f_aviation_accidents/ads/ad_widget.dart';
+import 'package:f_aviation_accidents/components/home_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:f_aviation_accidents/components/search_bar.dart';
 import 'package:f_aviation_accidents/components/accident_tile.dart';
 import 'package:f_aviation_accidents/utils/api.dart';
 import 'package:f_aviation_accidents/components/drawer.dart';
 import 'package:intl/intl.dart';
+
+enum OrderState {
+  newest,
+  oldest,
+}
+
+OrderState stringStateToEnum(String value) {
+  switch (value) {
+    case "dropdown_newest":
+      return OrderState.newest;
+    case "dropdown_oldest":
+      return OrderState.oldest;
+    default:
+      return OrderState.newest;
+  }
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,6 +44,7 @@ class HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
   int currentIndex = 0;
+  OrderState currentOrderState = OrderState.newest;
 
   @override
   void initState() {
@@ -39,7 +57,14 @@ class HomeScreenState extends State<HomeScreen> {
       if (_scrollController.position.pixels >=
               _scrollController.position.maxScrollExtent &&
           !_isLoading) {
-        _loadMoreData();
+        switch (currentOrderState) {
+          case OrderState.newest:
+            _loadMoreData();
+            break;
+          case OrderState.oldest:
+            _loadMoreDataReverse();
+            break;
+        }
       }
     });
   }
@@ -51,6 +76,25 @@ class HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void updateCurrentStateCallback(String state) {
+    OrderState nextState = stringStateToEnum(state);
+    setState(() {
+      if (currentOrderState == nextState) return;
+      data.clear();
+
+      currentOrderState = nextState;
+      switch (currentOrderState) {
+        case OrderState.newest:
+          currentIndex = 0;
+          _loadMoreData();
+          break;
+        case OrderState.oldest:
+          currentIndex = 0;
+          _loadMoreDataReverse();
+      }
+    });
+  }
+
   Future<void> _loadMoreData() async {
     List<AccidentTile> newData = [];
 
@@ -58,30 +102,49 @@ class HomeScreenState extends State<HomeScreen> {
       _isLoading = true;
     });
 
-    newData = await fetchAccidents(currentIndex, false);
-
-    setState(() {
-      data.addAll(newData);
-      currentIndex += 10;
-      _isLoading = false;
-    });
+    switch (currentOrderState) {
+      case OrderState.newest:
+        newData = await fetchAccidents(currentIndex, false);
+        setState(() {
+          data.addAll(newData);
+          _isLoading = false;
+          currentIndex += 10;
+        });
+      case OrderState.oldest:
+        newData = await fetchAccidents(currentIndex, false);
+        setState(() {
+          data.addAll(newData);
+          currentIndex += 10;
+          _isLoading = false;
+          currentOrderState = OrderState.newest;
+        });
+    }
   }
 
   Future<void> _loadMoreDataReverse() async {
-    // List<AccidentTile> newDataReverse = [];
+    List<AccidentTile> newDataReverse = [];
 
-    // setState(() {
-    //   _isLoading = true;
-    // });
+    setState(() {
+      _isLoading = true;
+    });
 
-    // // TODO:
-    // newDataReverse = await fetchAccidents(currentIndex, false);
-
-    // setState(() {
-    //   data.addAll(newData);
-    //   currentIndex += 10;
-    //   _isLoading = false;
-    // });
+    switch (currentOrderState) {
+      case OrderState.newest:
+        newDataReverse = await fetchAccidentsReverse(currentIndex, false);
+        setState(() {
+          data.addAll(newDataReverse);
+          currentIndex += 10;
+          _isLoading = false;
+          currentOrderState = OrderState.oldest;
+        });
+      case OrderState.oldest:
+        newDataReverse = await fetchAccidentsReverse(currentIndex, false);
+        setState(() {
+          data.addAll(newDataReverse);
+          currentIndex += 10;
+          _isLoading = false;
+        });
+    }
   }
 
   @override
@@ -128,7 +191,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(15.0, 90.0, 15.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(15.0, 115.0, 15.0, 0.0),
                     child: ListView.builder(
                       controller: _scrollController,
                       itemCount: data.length + (_isLoading ? 1 : 0),
@@ -150,7 +213,19 @@ class HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                         color: Colors.white.withAlpha(0),
                       ),
-                      child: SearchField(streamController: _streamController),
+                      child: Column(
+                        children: [
+                          SearchField(streamController: _streamController),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                              child: SortDropdownButton(
+                                  updateOrderState: updateCurrentStateCallback),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   BannerWidget(),

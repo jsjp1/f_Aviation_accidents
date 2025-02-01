@@ -130,7 +130,7 @@ Future<List<AccidentTile>> fetchAccidents(
 Future<List<AccidentTile>> fetchAccidentsReverse(
     int currentIndex, bool isStatsScreen) async {
   final _url =
-      "${dotenv.env["SERVER_HOST"]!}/api/accidents?start=$currentIndex&size=10";
+      "${dotenv.env["SERVER_HOST"]!}/api/accidents/reverse?start=$currentIndex&size=10";
   final url = Uri.parse(_url);
 
   try {

@@ -15,6 +15,9 @@
   "drawer_copyright": "저작권",
   "drawer_version": "버전",
 
+  "dropdown_newest": "최신순",
+  "dropdown_oldest": "오래된순",
+
   "description_screen_case": "상황",
   "description_screen_toggle_to_en": "원문 보기",
   "description_screen_toggle_to_ko": "번역문 보기",
