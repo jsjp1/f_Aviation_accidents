@@ -205,28 +205,16 @@ class HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withAlpha(0),
-                      ),
-                      child: Column(
-                        children: [
-                          SearchField(streamController: _streamController),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                              child: SortDropdownButton(
-                                  updateOrderState: updateCurrentStateCallback),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    top: 65.0,
+                    right: 15.0,
+                    child: SortDropdownButton(
+                        updateOrderState: updateCurrentStateCallback),
+                  ),
+                  Positioned(
+                    top: 10.0,
+                    left: 15.0,
+                    right: 15.0,
+                    child: SearchField(streamController: _streamController),
                   ),
                   BannerWidget(),
                 ],
